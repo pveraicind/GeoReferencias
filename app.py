@@ -14,8 +14,7 @@ archivo = st.file_uploader("Selecciona el archivo Excel", type=["xlsx"])
 
 if archivo is not None:
     df = pd.read_excel(archivo)
-    st.subheader("Datos de Salas")
-    st.dataframe(df)
+    # Visualización de datos se muestra solo al final
 else:
     st.warning("Por favor, sube un archivo Excel para continuar.")
     st.stop()
