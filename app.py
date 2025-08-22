@@ -7,10 +7,18 @@ from folium.plugins import HeatMap
 st.set_page_config(page_title="GeoReferencias FRNSW", layout="wide")
 st.title("GeoReferencias FRNSW")
 
-# Cargar datos
-df = pd.read_excel('georeferencias.xlsx')
-st.subheader("Datos de Salas")
-st.dataframe(df)
+
+# Subir archivo Excel
+st.subheader("Sube el archivo de georreferencias (.xlsx)")
+archivo = st.file_uploader("Selecciona el archivo Excel", type=["xlsx"])
+
+if archivo is not None:
+    df = pd.read_excel(archivo)
+    st.subheader("Datos de Salas")
+    st.dataframe(df)
+else:
+    st.warning("Por favor, sube un archivo Excel para continuar.")
+    st.stop()
 
 
 # Filtro por tipo de sala usando la columna 'tipo'
