@@ -74,9 +74,9 @@ if not df_filtrado.empty:
 else:
     st.info('No hay datos para mostrar la escala.')
 
-# Mapa ocupa casi todo el ancho
+# Mapa ocupa más ancho
 st.markdown("### Mapa de Salas y Heatmap")
-st_folium(m, width=1200, height=600)
+st_folium(m, width=1500, height=650)
 
 # Tabla de datos al final
 st.markdown("### Datos de Salas")
