@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+streamlit/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# Excel/outputs temporales
+*.xlsx
+*.xls
+*.csv
+
+# Archivos de mapas generados
+*.html
+*.kmz
+
+# Archivos de configuración de sistema
+.DS_Store
+Thumbs.db
+
+# Otros
+*.log
+*.tmp
+
+# Streamlit secrets
+.secrets.toml
