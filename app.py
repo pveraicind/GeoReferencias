@@ -49,23 +49,26 @@ if not df_filtrado.empty:
     heat_data = df_filtrado[['Latitud', 'Longitud', 'Producción anual']].values.tolist()
     HeatMap(heat_data, gradient={0.4: 'blue', 0.65: 'lime', 0.8: 'yellow', 1: 'red'}).add_to(m)
 
-# Mostrar mapa en Streamlit
+# Mostrar mapa en Streamlit y leyenda de escala del heatmap
 col1, col2 = st.columns([2, 1])
 with col1:
     st.subheader("Mapa de Salas y Heatmap")
     st_folium(m, width=900, height=600)
 
-# Gráfico de barras de Producción anual para las salas seleccionadas
-import matplotlib.pyplot as plt
+# Leyenda de escala del heatmap
 with col2:
-    st.subheader("Producción anual por sala")
+    st.subheader("Escala del Heatmap")
     if not df_filtrado.empty:
-        fig, ax = plt.subplots(figsize=(5, 6))
-        df_filtrado_sorted = df_filtrado.sort_values('Producción anual', ascending=False)
-        ax.barh(df_filtrado_sorted['Nombre Sala'], df_filtrado_sorted['Producción anual'], color='orange')
-        ax.set_xlabel('Litros')
-        ax.set_ylabel('Sala')
-        ax.invert_yaxis()
-        st.pyplot(fig)
+        prod_min = int(df_filtrado['Producción anual'].min())
+        prod_max = int(df_filtrado['Producción anual'].max())
+        st.markdown(f"**Rango de producción anual:** {prod_min:,} a {prod_max:,} litros")
+        st.markdown(
+            '''<div style="height:30px; background: linear-gradient(to right, blue 0%, lime 40%, yellow 65%, red 100%);"></div>
+            <div style="display:flex; justify-content:space-between; font-size:12px;">
+                <span style="color:blue;">Bajo</span>
+                <span style="color:lime;">Medio-Bajo</span>
+                <span style="color:yellow;">Medio-Alto</span>
+                <span style="color:red;">Alto</span>
+            </div>''', unsafe_allow_html=True)
     else:
-        st.info('No hay datos para mostrar el gráfico.')
+        st.info('No hay datos para mostrar la escala.')
